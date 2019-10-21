@@ -7,18 +7,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.license4j.License;
+
 import in.easyapp.licence4j.easyapplicence4j.exception.Licence4jNotFoundException;
 import in.easyapp.licence4j.easyapplicence4j.model.LicenseRequestMdl;
 import in.easyapp.licence4j.easyapplicence4j.repository.Licence4jRepository;
 import in.easyapp.licence4j.easyapplicence4j.request.LicenseKey;
 import in.easyapp.licence4j.easyapplicence4j.request.LicenseRequest;
 import in.easyapp.licence4j.easyapplicence4j.service.Licence4jService;
+import in.easyapp.licence4j.easyapplicence4j.util.Licence4jUtil;
 
 @Service
 public class Licence4jServiceImpl implements Licence4jService {
 	
 	@Autowired
 	private Licence4jRepository licence4jRepository;
+	
+	
 
 	@Override
 	public LicenseKey generateLicense(LicenseRequest licenseRequest) {
@@ -30,8 +35,20 @@ public class Licence4jServiceImpl implements Licence4jService {
 		requestMdl.setServiceId(licenseRequest.getServiceId());
 		requestMdl.setUserId(licenseRequest.getUserId());
 		requestMdl.setValidForDays(licenseRequest.getValidForDays());
+		License validateResponse = null; 
+		if(licenseRequest.getServiceId()=="service_id_1" && licenseRequest.getValidForDays()==360) {
+			
+		}else if(licenseRequest.getServiceId()=="service_id_1" && licenseRequest.getValidForDays()==180) {
+			
+		}else {
+			String licenseStringToValidate = Licence4jUtil.generateLicence("1571158624658934459511571158529822");
+			if(licenseStringToValidate!=null && !licenseStringToValidate.isEmpty()) {
+				validateResponse = Licence4jUtil.validate(publicKey, licenseStringToValidate, requestMdl.getServiceId());
+			}
+			requestMdl.setLicenseKey(validateResponse.getLicenseString());
+		}
 		licence4jRepository.save(requestMdl);
-		return new LicenseKey(licenseRequest.getLicenseKey(),licenseRequest.getUserId());
+		return new LicenseKey(validateResponse.getLicenseString(),licenseRequest.getUserId());
 		
 	}
 

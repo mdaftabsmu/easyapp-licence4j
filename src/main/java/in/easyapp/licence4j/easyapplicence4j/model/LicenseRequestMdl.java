@@ -21,7 +21,7 @@ public class LicenseRequestMdl implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	@NotBlank
 	@Column(name="app_id",nullable=false)
 	private String appId ;
@@ -109,7 +109,7 @@ public class LicenseRequestMdl implements Serializable{
 	}
 	
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 

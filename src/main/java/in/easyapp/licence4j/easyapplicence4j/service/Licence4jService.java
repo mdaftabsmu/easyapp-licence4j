@@ -5,7 +5,7 @@ import java.util.List;
 import in.easyapp.licence4j.easyapplicence4j.request.LicenseKey;
 import in.easyapp.licence4j.easyapplicence4j.request.LicenseRequest;
 
-public interface Licence4jService {
+public interface Licence4jService extends Licence4jCommonConstants {
 
 	LicenseKey generateLicense(LicenseRequest licenseRequest);
 
