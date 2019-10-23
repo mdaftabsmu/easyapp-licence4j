@@ -37,16 +37,13 @@ public class Licence4jController {
     @RequestMapping(value = "/apps/{appId}/services/{serviceId}/activate", method = RequestMethod.POST)
     public LicenseResponse activateLicense(@PathVariable("appId") String appId,
                                       @PathVariable("serviceId") String serviceId) {
-        LicenseResponse res =  new LicenseResponse();
-        res.setStatus("ACTIVATED");
-        return res;
+    	return licence4jService.activateLicense(serviceId,appId);
     }
 
     @RequestMapping(value = "/apps/{appId}/services/{serviceId}/validate", method = RequestMethod.POST)
     public LicenseResponse validateLicense(@PathVariable("appId") String appId,
                                       @PathVariable("serviceId") String serviceId) {
-        LicenseResponse res =  new LicenseResponse();
-        res.setStatus("VALID");
-        return res;
+       
+        return licence4jService.validateLicense(appId,serviceId);
     }
 }

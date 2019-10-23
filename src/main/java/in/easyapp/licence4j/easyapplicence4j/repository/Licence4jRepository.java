@@ -13,4 +13,6 @@ public interface Licence4jRepository extends JpaRepository<LicenseRequestMdl, Lo
 
 	List<LicenseRequestMdl> findAllByAppIdAndServiceId(String appId, String serviceId);
 
+	LicenseRequestMdl  findByAppIdAndServiceId(String serviceId, String appId);
+
 }
