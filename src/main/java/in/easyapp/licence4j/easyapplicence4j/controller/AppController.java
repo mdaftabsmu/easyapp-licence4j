@@ -16,8 +16,12 @@ import in.easyapp.licence4j.easyapplicence4j.service.AppService;
 @RestController
 public class AppController {
 	
-	@Autowired
-	private AppService appService;
+	private final AppService appService;
+
+    @Autowired
+    public AppController(AppService appService) {
+        this.appService = appService;
+    }
 
     @RequestMapping(value = "/apps", method = RequestMethod.POST)
     public ProjectMdl createProject(@RequestBody ProjectMdl app, Principal principal) {
