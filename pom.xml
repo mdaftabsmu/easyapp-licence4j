@@ -24,6 +24,17 @@
 	</properties>
 
 	<repositories>
+        <repository>
+        <releases>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+            <checksumPolicy>fail</checksumPolicy>
+        </releases>
+        <id>license4j-runtime-library</id>
+        <name>License4J Runtime Library Maven Repository</name>
+        <url>http://www.license4j.com/maven/</url>
+        <layout>default</layout>
+    </repository>
 		<repository>
 			<id>central</id>
 			<name>Central Repository</name>
@@ -113,6 +124,11 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.license4j</groupId>
+			<artifactId>license4j-runtime-library</artifactId>
+			<version>RELEASE</version>
 		</dependency>
 	</dependencies>
 
