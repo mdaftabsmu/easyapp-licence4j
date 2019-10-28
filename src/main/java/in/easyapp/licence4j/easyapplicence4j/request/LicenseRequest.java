@@ -1,24 +1,25 @@
 package in.easyapp.licence4j.easyapplicence4j.request;
 
-import javax.persistence.Entity;
 
 import in.easyapp.licence4j.easyapplicence4j.model.LicenseRequestMdl;
 
-@Entity
 public class LicenseRequest {
-    private String appId = "appId_1";
-    private String serviceId = "testService_1";
-    private int  validForDays = 180;
-    private String userId = "testUserId";
-    private String licenseKey = "iuefifoesfj21epoj.fhaiwf9-28j.fuuihjbb7347yoihfygybki";
-    private boolean  activationRequired  =false;
+    private String appId;
+    private String serviceId ;
+    private int  validForDays;
+    private String userId;
+    private String subscriptionId;
+    private boolean  activationRequired;
+    
+    public LicenseRequest() {
+		// TODO Auto-generated constructor stub
+	}
 
     public LicenseRequest(LicenseRequestMdl model) {
 		this.appId = model.getAppId();
 		this.serviceId = model.getServiceId();
 		this.validForDays = model.getValidForDays();
 		this.userId = model.getUserId();
-		this.licenseKey = model.getAppId();
 		this.activationRequired = model.getActivationRequired();
 	}
 
@@ -54,14 +55,6 @@ public class LicenseRequest {
         this.userId = userId;
     }
 
-    public String getLicenseKey() {
-        return licenseKey;
-    }
-
-    public void setLicenseKey(String licenseKey) {
-        this.licenseKey = licenseKey;
-    }
-
     public boolean getActivationRequired() {
         return activationRequired;
     }
@@ -69,4 +62,17 @@ public class LicenseRequest {
     public void setActivationRequired(boolean activationRequired) {
         this.activationRequired = activationRequired;
     }
+
+	public String getSubscriptionId() {
+		return subscriptionId;
+	}
+
+	public void setSubscriptionId(String subscriptionId) {
+		this.subscriptionId = subscriptionId;
+	}
+
+	@Override
+	public String toString() {
+		return "LicenseRequest [appId=" + appId + ", serviceId=" + serviceId + ", userId=" + userId + "]";
+	}
 }

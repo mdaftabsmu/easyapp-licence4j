@@ -33,7 +33,6 @@ public class Licence4jServiceImpl implements Licence4jService {
 		requestMdl.setActivationRequired(true);
 		requestMdl.setAppId(licenseRequest.getAppId());
 		requestMdl.setCreatedAt(new Date());
-		requestMdl.setLicenseKey(licenseRequest.getLicenseKey());
 		requestMdl.setServiceId(licenseRequest.getServiceId());
 		requestMdl.setUserId(licenseRequest.getUserId());
 		requestMdl.setValidForDays(licenseRequest.getValidForDays());
@@ -54,12 +53,17 @@ public class Licence4jServiceImpl implements Licence4jService {
 			String licenseStringToValidate = Licence4jUtil.generateLicence("1571158624658934459511571158529822");
 			if(licenseStringToValidate!=null && !licenseStringToValidate.isEmpty()) {
 				validateResponse = Licence4jUtil.validate(publicKey, licenseStringToValidate, requestMdl.getServiceId());
+				if(validateResponse !=null && validateResponse.getValidationStatus().name().equals("LICENSE_VALID")) {
+					requestMdl.setLicenseKey(validateResponse.getLicenseString());
+					requestMdl.setActivationRequired(false);
+					requestMdl.setSubscriptionId(licenseRequest.getSubscriptionId());
+					System.out.println("============"+requestMdl);
+					licence4jRepository.save(requestMdl);
+					return new LicenseKey(licenseRequest.getUserId(),requestMdl.getAppId(),requestMdl.getSubscriptionId(),"LICENSE_VALID");
+				}
 			}
-			requestMdl.setLicenseKey(validateResponse.getLicenseString());
 		}
-		licence4jRepository.save(requestMdl);
-		return new LicenseKey(validateResponse.getLicenseString(),licenseRequest.getUserId());
-		
+		return new LicenseKey(licenseRequest.getUserId(),requestMdl.getAppId(),requestMdl.getSubscriptionId(),"LICENSE_INVALID");
 	}
 
 	@Override
@@ -77,7 +81,7 @@ public class Licence4jServiceImpl implements Licence4jService {
 
 	@Override
 	public LicenseResponse activateLicense(String serviceId, String appId) {
-		LicenseRequestMdl request = licence4jRepository.findByAppIdAndServiceId(serviceId,appId);
+		LicenseRequestMdl request = licence4jRepository.findByAppIdAndServiceId(appId,serviceId);
 		if(request==null) {
 			 throw new Licence4jNotFoundException("Licences not found ");
 		}

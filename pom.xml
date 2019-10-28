@@ -45,7 +45,6 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
 	<pluginRepositories>
 		<pluginRepository>
 			<id>central</id>
@@ -60,11 +59,7 @@
 			</releases>
 		</pluginRepository>
 	</pluginRepositories>
-
-
-
 	<dependencies>
-		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>

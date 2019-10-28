@@ -19,31 +19,26 @@ public class LicenseRequestMdl implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@NotBlank
-	@Column(name="app_id",nullable=false)
+	@Column(name="app_id")
 	private String appId ;
-	@NotBlank
-	@Column(name="service_id",nullable=false)
+	@Column(name="service_id")
 	private String serviceId ;
-	@NotBlank
-	@Column(name="valid_for_days",nullable=false)
+	@Column(name="valid_for_days")
 	private int  validForDays;
-	@NotBlank
-	@Column(name="user_id",nullable=false)
+	@Column(name="user_id")
 	private String userId;
-	@NotBlank
-	@Column(name="license_key",nullable=false)
+	@Column(name="license_key")
 	private String licenseKey ;
-	@NotBlank
-	@Column(name="activation_required",nullable=false)
+	@Column(name="activation_required")
 	private boolean  activationRequired ;
-	
-	@NotBlank
-	@Column(name="created_at",nullable=false)
+	@Column(name="created_at")
 	private Date createdAt;
+	@Column(name="subscription_id")
+	private String subscriptionId;
 	
 
 	public LicenseRequestMdl() {
@@ -107,12 +102,9 @@ public class LicenseRequestMdl implements Serializable{
 	public void setActivationRequired(boolean activationRequired) {
 		this.activationRequired = activationRequired;
 	}
-	
-
 	public long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -124,10 +116,22 @@ public class LicenseRequestMdl implements Serializable{
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+	
+	public String getSubscriptionId() {
+		return subscriptionId;
+	}
+
+	public void setSubscriptionId(String subscriptionId) {
+		this.subscriptionId = subscriptionId;
+	}
 
 	@Override
 	public String toString() {
-		return "LicenseRequestMdl [appId=" + appId + ", userId=" + userId + "]";
-	}  
+		return "LicenseRequestMdl [id=" + id + ", appId=" + appId + ", serviceId=" + serviceId + ", validForDays="
+				+ validForDays + ", userId=" + userId + ", licenseKey=" + licenseKey + ", activationRequired="
+				+ activationRequired + ", createdAt=" + createdAt + ", subscriptionId=" + subscriptionId + "]";
+	}
+
+	
 
 }
